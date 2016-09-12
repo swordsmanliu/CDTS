@@ -47,4 +47,31 @@ public class GetTimer {
 			return null;
 		}
 	}
+	public String rundate(String text) {
+		String dateStr = text.replaceAll("\\s+", " ");
+
+		try {
+			List matches = null;
+			Pattern p = Pattern.compile("(\\d{1,4}[-|\\/]\\d{1,2}[-|\\/]\\d{1,2})", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+			Matcher matcher = p.matcher(dateStr);
+			if (matcher.find() && matcher.groupCount() >= 1) {
+				matches = new ArrayList();
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					String temp = matcher.group(i);
+					matches.add(temp);
+				}
+			} else {
+				matches = Collections.EMPTY_LIST;
+			}
+
+			if (matches.size() > 0) {
+				return ((String) matches.get(0)).trim();
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
